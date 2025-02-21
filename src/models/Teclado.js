@@ -1,9 +1,20 @@
 class Teclado {
+    static tentativas = 0;
+
     static gerarTeclado() {
+        if (this.tentativas >= 3) {
+            this.tentativas = 0;
+            return this.embaralharTeclas();
+        }
+
+        this.tentativas++; 
+        return this.teclas; 
+    }
+
+    static embaralharTeclas() {
         let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-        // Embaralhar os números, o 0,5 faz com que nas saidas negativas sejam embaralhados
-        numeros.sort(() => Math.random() - 0.5);
+        numeros.sort(() => Math.random());
 
         let teclas = [];
 
@@ -13,11 +24,16 @@ class Teclado {
 
             teclas.push({
                 label: `${n1} ou ${n2}`,
-                value: `${n1}, ${n2}`,
+                value: `${n1},${n2}`,
             });
         }
+
+        this.teclas = teclas;
         return teclas;
     }
 }
+
+
+Teclado.teclas = Teclado.embaralharTeclas();
 
 module.exports = Teclado;

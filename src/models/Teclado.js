@@ -1,5 +1,6 @@
 class Teclado {
     static tentativas = 0;
+    static teclas = [];
 
     static gerarTeclado() {
         if (this.tentativas >= 3) {
@@ -8,13 +9,13 @@ class Teclado {
         }
 
         this.tentativas++; 
-        return this.teclas; 
+        return this.teclas;
     }
 
     static embaralharTeclas() {
         let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 0];
 
-        numeros.sort(() => Math.random());
+        numeros.sort(() => Math.random() - 0.5);
 
         let teclas = [];
 
@@ -33,7 +34,6 @@ class Teclado {
     }
 }
 
-
 Teclado.teclas = Teclado.embaralharTeclas();
 
-module.exports = Teclado;
+export default Teclado;

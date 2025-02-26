@@ -1,4 +1,4 @@
-import Teclado from "/Users/user/Documents/GitClones/algoritmosAvancados/src/models/Teclado.js";
+import Teclado from "../models/Teclado.js";
 
 const gerarTeclado = (req, res) => {
     try {

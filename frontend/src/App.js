@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Teclado from "./components/Teclado";
-import ResetButton from "./components/ResetButton";
+import AcessButton from "./components/AcessButton";
 import tecladoService from "./services/tecladoService";
 
 function App() {
@@ -32,10 +32,10 @@ function App() {
 
   return (
     <div className="App">
-      <h1>Teclado Banco</h1>
+      <h1>Teclado Virtual</h1>
       {erro && <p style={{ color: "red" }}>{erro}</p>}
       <Teclado teclas={teclado} />
-      <ResetButton onReset={resetarTentativas} />
+      <AcessButton onAcess={resetarTentativas} />
     </div>
   );
 }

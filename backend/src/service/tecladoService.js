@@ -12,6 +12,8 @@ const gerarTeclado = (req, res) => {
 
 const resetarTentativas = (req, res) => {
     Teclado.tentativas = 0;
+    Teclado.embaralharTeclas();
+    console.log("vamos resetar essa porra");
     res.status(200).json({ message: "Tentativas resetadas" });
 };
 

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Teclado from "./components/Teclado";
 import AcessButton from "./components/AcessButton";
 import tecladoService from "./services/tecladoService";
+import logo from '../src/resources/catolica.png'; 
 
 function App() {
   const [teclado, setTeclado] = useState([]);
@@ -33,9 +34,11 @@ function App() {
   return (
     <div className="App">
       <h1>Teclado Virtual</h1>
-      {erro && <p style={{ color: "red" }}>{erro}</p>}
+      {erro && <p className="error-message">{erro}</p>}
       <Teclado teclas={teclado} />
       <AcessButton onAcess={resetarTentativas} />
+
+      <img src={logo} alt="Católica SC" className="logo"/>
     </div>
   );
 }

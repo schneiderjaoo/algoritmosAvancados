@@ -7,7 +7,7 @@ const gerarTeclado = async () => {
 };
 
 const resetarTentativas = async () => {
-  return axios.post(`${API_URL}/teclado/resetar`);
+  return axios.post(`${API_URL}/teclado/acessar`);
 };
 
 export default { gerarTeclado, resetarTentativas };

@@ -1,5 +1,7 @@
 import Teclado from "../models/Teclado.js";
 
+const senhaFixa = "1289";
+
 const gerarTeclado = (req, res) => {
     try {
         const teclado = Teclado.gerarTeclado();
@@ -17,4 +19,14 @@ const resetarTentativas = (req, res) => {
     res.status(200).json({ message: "Tentativas resetadas" });
 };
 
-export default { gerarTeclado, resetarTentativas };
+const acessar = (req, res) => {
+    const { senha } = req.body;
+
+    if (senha === senhaFixa) {
+        res.status(200).json({ message: "Acesso concedido!" });
+    } else {
+        res.status(400).json({ message: "Acesso negado!" });
+    }
+};
+
+export default { gerarTeclado, resetarTentativas, acessar };

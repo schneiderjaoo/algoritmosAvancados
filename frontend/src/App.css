@@ -1,12 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@400;500&display=swap');
+
+:root {
+  --vermelho-bordo: #800020;
+  --cinza-claro: #f4f4f4;
+  --cinza-suave: #ece4e4;  
+  --texto-principal: #333333;
+  --dourado: #c5a700;
+}
+
+body {
+  font-family: 'Roboto', sans-serif;
+  background-color: var(--cinza-suave); 
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .App {
   text-align: center;
   margin-top: 50px;
+  display: flex;
+  flex-direction: column;  /* Organiza os itens em uma coluna */
+  justify-content: center;
+  align-items: center;
 }
 
 .teclado-container {
   display: flex;
   flex-direction: column;
   align-items: center;
+  background-color: #ffffff; 
+  padding: 20px;
+  border-radius: 15px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .display {
@@ -15,48 +43,85 @@
 
 .display-input {
   width: 250px;
-  font-size: 24px;
-  padding: 10px;
+  font-size: 22px;
+  padding: 12px;
   text-align: center;
-  border-radius: 5px;
-  border: 1px solid #ccc;
+  border-radius: 8px;
+  border: 1px solid #ddd;
   margin-bottom: 20px;
+  background-color: #f9f9f9;
+  transition: border-color 0.3s;
+}
+
+.display-input:focus {
+  border-color: var(--vermelho-bordo);
+  outline: none;
 }
 
 .teclado {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 12px;
+  margin-top: 20px;
 }
 
 .teclado-button {
-  padding: 15px;
+  padding: 18px;
   font-size: 20px;
   cursor: pointer;
-  background-color: #f0f0f0;
-  border: 2px solid #ccc;
-  border-radius: 8px;
-  transition: background-color 0.3s;
-  width: 100px; 
+  background-color: var(--vermelho-bordo);
+  border: none;
+  border-radius: 12px;
+  color: white;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s;
+  width: 100px;
 }
 
 .teclado-button:hover {
-  background-color: #ddd;
+  background-color: #a7001b;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+  transform: translateY(-2px);
 }
-  
-  .acess-button {
-    margin-top: 20px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    background-color: #ec9633;
-    color: white;
-    border: none;
-    border-radius: 8px;
-    transition: background-color 0.3s;
-  }
-  
-  .reset-button:hover {
-    background-color: #e6b800;
-  }
-  
+
+.teclado-button:active {
+  background-color: #7c0014;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(2px);
+}
+
+.acess-button {
+  margin-top: 30px;
+  padding: 12px 24px;
+  font-size: 18px;
+  cursor: pointer;
+  background-color: var(--dourado);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  transition: background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.acess-button:hover {
+  background-color: #d68c1f;
+  box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+}
+
+.acess-button:active {
+  background-color: #c87c17;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transform: translateY(2px);
+}
+
+.error-message {
+  color: #e74c3c;
+  font-size: 16px;
+  margin-top: 10px;
+}
+
+.logo {
+  margin-top: 80px;
+  width: 300px; 
+  height: auto; 
+}

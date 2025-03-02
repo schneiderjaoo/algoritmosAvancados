@@ -3,10 +3,10 @@ import pg from "pg";
 const { Client } = pg;
 
 const dbConfig = {
-    user: '',
+    user: 'user',
     host: 'localhost',
-    database: 'bancoAlgoritmos',
-    password: '',
+    database: 'bancoalgoritmos',
+    password: 'user',
     port: 5432,
 };
 

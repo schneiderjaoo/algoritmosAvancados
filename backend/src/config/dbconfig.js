@@ -1,16 +1,26 @@
-import pg from 'pg';
+import pg from "pg";
 
-const { Client} = pg;
-const cliente = new Client();
-await cliente.connect();
+const { Client } = pg;
 
-try {
-    const res = await cliente.query("select  $1::text as message", ["Hello world!"]);
-    console.log(res.rows[0].message); // Hello world!
-} catch (err){
-    console.log("Erro ao aguardar resposta: "+err);   
-} finally {
-    await cliente.end();
+const dbConfig = {
+    user: '',
+    host: 'localhost',
+    database: 'bancoAlgoritmos',
+    password: '',
+    port: 5432,
+};
+
+async function connectDB() {
+    const client = new Client(dbConfig);
+
+    try {
+        await client.connect();
+        console.log("Conectado ao PostgreSQL!");
+        return client;
+    } catch (err) {
+        console.error("Erro ao conectar ao banco:", err);
+        throw err;
+    }
 }
 
-export default cliente;
+export default connectDB;

@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Teclado from "./components/Teclado";
 import AcessButton from "./components/AcessButton";
+import CreateUserButton from "./components/CreateUserButton";
 import tecladoService from "./services/tecladoService";
 import logo from '../src/resources/catolica.png'; 
+import CreateUserModal from "./components/CreateUserModal";
 
 function App() {
   const [teclado, setTeclado] = useState([]);
@@ -43,13 +45,19 @@ function App() {
     }
   };
 
+  const [isModalOpen, setIsModalOpen] = useState(false);
+
+  const openModal = () => setIsModalOpen(true);
+  const closeModal = () => setIsModalOpen(false);
+
   return (
     <div className="App">
       <h1>Teclado Virtual</h1>
       {erro && <p className="error-message">{erro}</p>}
-      <Teclado teclas={teclado} setSenha={setSenha} senha={senha}/>
-      <AcessButton onAcess={() => acessarSistema(senha)} />
-
+      <Teclado teclas={teclado} />
+      <AcessButton onAcess={resetarTentativas} />
+      <CreateUserButton onAcess={openModal}/>
+      <CreateUserModal isOpen={isModalOpen} onRequestClose={closeModal} />
       <img src={logo} alt="Católica SC" className="logo"/>
     </div>
   );

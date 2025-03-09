@@ -6,8 +6,8 @@ const gerarTeclado = async () => {
   return axios.get(`${API_URL}/teclado`);
 };
 
-const resetarTentativas = async () => {
-  return axios.post(`${API_URL}/teclado/acessar`);
+const acessarSistema = async (senha) => {
+  return axios.post(`${API_URL}/teclado/acessar`, { senha });
 };
 
-export default { gerarTeclado, resetarTentativas };
+export default { gerarTeclado, acessarSistema };

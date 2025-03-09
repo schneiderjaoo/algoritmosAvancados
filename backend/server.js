@@ -6,6 +6,7 @@ import tecladoRoutes from "./src/routes/tecladoRoutes.js";
 import connectDB from "./src/config/dbconfig.js";
 
 const app = express();
+app.use(express.json());
 const PORT = process.env.PORT || 3000;
 
 app.use(cors());

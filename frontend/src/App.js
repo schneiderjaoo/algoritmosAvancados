@@ -7,6 +7,7 @@ import logo from '../src/resources/catolica.png';
 function App() {
   const [teclado, setTeclado] = useState([]);
   const [erro, setErro] = useState("");
+  const [senha, setSenha] = useState("");
 
   useEffect(() => {
     gerarTeclado();
@@ -21,13 +22,24 @@ function App() {
     }
   };
 
-  const resetarTentativas = async () => {
+  // const acessarSistema = async () => {
+  //   try {
+  //     await tecladoService.acessarSistema();
+  //     setErro("");
+  //     gerarTeclado();
+  //   } catch (err) {
+  //     setErro("Erro ao tentar acessar o sistema");
+  //   }
+  // };
+  const acessarSistema = async (senha) => {
     try {
-      await tecladoService.resetarTentativas();
+      console.log("Enviando senha: ", senha);
+      const response = await tecladoService.acessarSistema(senha);
       setErro("");
       gerarTeclado();
+      alert(response.data.message);
     } catch (err) {
-      setErro("Erro ao resetar tentativas");
+      setErro("Erro ao tentar acessar o sistema");
     }
   };
 
@@ -35,8 +47,8 @@ function App() {
     <div className="App">
       <h1>Teclado Virtual</h1>
       {erro && <p className="error-message">{erro}</p>}
-      <Teclado teclas={teclado} />
-      <AcessButton onAcess={resetarTentativas} />
+      <Teclado teclas={teclado} setSenha={setSenha} senha={senha}/>
+      <AcessButton onAcess={() => acessarSistema(senha)} />
 
       <img src={logo} alt="Católica SC" className="logo"/>
     </div>

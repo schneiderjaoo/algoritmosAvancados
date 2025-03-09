@@ -5,6 +5,7 @@ import CreateUserButton from "./components/CreateUserButton";
 import tecladoService from "./services/tecladoService";
 import logo from '../src/resources/catolica.png'; 
 import CreateUserModal from "./components/CreateUserModal";
+import UserGrid from "./components/userGrid";
 
 function App() {
   const [teclado, setTeclado] = useState([]);
@@ -41,11 +42,13 @@ function App() {
   return (
     <div className="App">
       <h1>Teclado Virtual</h1>
+      <UserGrid uGrid />
       {erro && <p className="error-message">{erro}</p>}
       <Teclado teclas={teclado} />
       <AcessButton onAcess={resetarTentativas} />
       <CreateUserButton onAcess={openModal}/>
       <CreateUserModal isOpen={isModalOpen} onRequestClose={closeModal} />
+      <userGrid uGrid />
       <img src={logo} alt="Católica SC" className="logo"/>
     </div>
   );

@@ -10,7 +10,7 @@ function CreateUserModal({ isOpen, onRequestClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post("http://localhost:3001/usuarios", {
+      const response = await axios.post('http://localhost:3001/api/usuarios', {
         nome_usuario: nomeUsuario,
         senha_hash: senha,
         email: email,

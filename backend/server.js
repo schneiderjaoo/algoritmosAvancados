@@ -2,16 +2,23 @@ import express from "express";
 import cors from "cors";
 import helmet from "helmet";
 import morgan from "morgan";
+import bodyParser from "body-parser";
 import tecladoRoutes from "./src/routes/tecladoRoutes.js";
 import connectDB from "./src/config/dbconfig.js";
+import usuarioRoutes from "./src/routes/userRoutes.js";
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 3001;
 
-app.use(express.json()); 
-app.use(cors());
+app.use(cors({
+    origin: "http://localhost:3000",
+}));
 app.use(helmet());
 app.use(morgan("dev"));
+app.use(bodyParser.json());
+
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json());
 
 async function escutandoServidor() {
     try {
@@ -22,7 +29,8 @@ async function escutandoServidor() {
             next();
         });
 
-        app.use("/api", tecladoRoutes);  
+        app.use("/api", tecladoRoutes); 
+        app.use("/api", usuarioRoutes); 
 
         app.listen(PORT, () => {
             console.log(`Server rodando na porta ${PORT}`);

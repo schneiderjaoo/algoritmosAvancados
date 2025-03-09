@@ -2,7 +2,7 @@ import React from "react";
 
 function CreateUserButton({ onAcess }) {
   return (
-    <button className="createUser-button" onClick={onAcess}>
+    <button className="acess-button" onClick={onAcess}>
       Criar usuário
     </button>
   );

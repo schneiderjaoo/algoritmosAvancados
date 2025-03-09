@@ -18,45 +18,28 @@ const resetarTentativas = (req, res) => {
     res.status(200).json({ message: "Tentativas resetadas" });
 };
 
-// const acessar = (req, res) => {
-//     console.log('Recebendo requisição...');
-//     const { senha } = req.body;
-
-//     console.log("Recebi a senha: ", senha);
-
-//     if (senha === senhaFixa) {
-//         res.status(200).json({ message: "Acesso concedido!" });
-//     } else {
-//         res.status(400).json({ message: "Acesso negado!" });
-//     }
-// };
-
 const acessar = (req, res) => {
     console.log('Recebendo requisição...');
-    const { senha } = req.body; // Senha digitada pelo usuário
+    const { senha } = req.body; 
     
+    console.log("Senha fixa: ", senhaFixa);
     console.log("Recebi a senha: ", senha);
 
-    // Mapeando a senha fixa para uma lista de teclas possíveis
-    const teclas = {
-        '1': ['1', '2'],
-        '2': ['3', '4'],
-        '3': ['5', '6'],
-        '4': ['7', '8'],
-        '5': ['9', '0'],
-    };
-
-    // Função para verificar se a senha digitada é válida
     const validarSenha = (senhaDigitada) => {
-        let senhaDigitadaArray = senhaDigitada.split('');
-        
-        // Verifica se cada número digitado pertence ao conjunto de números válidos para a tecla correspondente
-        for (let i = 0; i < senhaDigitadaArray.length; i++) {
-            const digito = senhaDigitadaArray[i];
-            const tecla = senhaFixa[i]; // Pega a tecla correspondente na senha fixa
+        if (senhaDigitada.length / 2 !== senhaFixa.length) {
+            return false;
+        }
 
-            // Se o número digitado não pertence à tecla correspondente, a senha é inválida
-            if (!teclas[tecla] || !teclas[tecla].includes(digito)) {
+        if (senhaDigitada.length % 2 !== 0) {
+            return false;
+        }
+
+        for (let i = 0; i < senhaFixa.length; i++) {
+            const digitoFixo = senhaFixa[i];
+            
+            const parDigitado = senhaDigitada.substr(i * 2, 2);
+
+            if (!parDigitado.includes(digitoFixo)) {
                 return false;
             }
         }
@@ -64,11 +47,11 @@ const acessar = (req, res) => {
         return true;
     };
 
-    // Verifica a senha digitada
     if (validarSenha(senha)) {
         res.status(200).json({ message: "Acesso concedido!" });
     } else {
-        console.log('deu ruim');
+        console.log('Senha inválida');
+        Teclado.embaralharTeclas();
         res.status(400).json({ message: "Acesso negado!" });
     }
 };

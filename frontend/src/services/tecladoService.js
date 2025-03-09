@@ -11,3 +11,4 @@ const acessarSistema = async (senha) => {
 };
 
 export default { gerarTeclado, acessarSistema };
+ 

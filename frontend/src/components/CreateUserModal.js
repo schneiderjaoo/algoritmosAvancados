@@ -1,27 +1,27 @@
-import React, { useState } from 'react';
-import axios from 'axios';
+import React, { useState } from "react";
+import axios from "axios";
 
 function CreateUserModal({ isOpen, onRequestClose }) {
-  const [nomeUsuario, setNomeUsuario] = useState('');
-  const [senha, setSenha] = useState('');
-  const [email, setEmail] = useState('');
-  const [erro, setErro] = useState('');
+  const [nomeUsuario, setNomeUsuario] = useState("");
+  const [senha, setSenha] = useState("");
+  const [email, setEmail] = useState("");
+  const [erro, setErro] = useState("");
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/usuarios', {
+      await axios.post("http://localhost:3001/usuarios", {
         nome_usuario: nomeUsuario,
         senha_hash: senha,
         email: email,
       });
       onRequestClose();
-      setNomeUsuario('');
-      setSenha('');
-      setEmail('');
-      setErro('');
+      setNomeUsuario("");
+      setSenha("");
+      setEmail("");
+      setErro("");
     } catch (error) {
-      setErro('Erro ao criar usuário');
+      setErro("Erro ao criar usuário");
     }
   };
 
@@ -33,8 +33,7 @@ function CreateUserModal({ isOpen, onRequestClose }) {
         <h2>Criar Usuário</h2>
         {erro && <p className="ModalError">{erro}</p>}
         <form onSubmit={handleSubmit}>
-          <div>
-            <label>Nome de Usuário:</label>
+          <div className="InputContainer">
             <input
               type="text"
               value={nomeUsuario}
@@ -42,9 +41,9 @@ function CreateUserModal({ isOpen, onRequestClose }) {
               required
               className="ModalInput"
             />
+            <label className={nomeUsuario ? "active" : ""}>Nome de Usuário</label>
           </div>
-          <div>
-            <label>Senha:</label>
+          <div className="InputContainer">
             <input
               type="password"
               value={senha}
@@ -52,9 +51,9 @@ function CreateUserModal({ isOpen, onRequestClose }) {
               required
               className="ModalInput"
             />
+            <label className={senha ? "active" : ""}>Senha</label>
           </div>
-          <div>
-            <label>Email:</label>
+          <div className="InputContainer">
             <input
               type="email"
               value={email}
@@ -62,6 +61,7 @@ function CreateUserModal({ isOpen, onRequestClose }) {
               required
               className="ModalInput"
             />
+            <label className={email ? "active" : ""}>Email</label>
           </div>
           <button type="submit" className="ModalButton ModalButtonCreate">
             Criar

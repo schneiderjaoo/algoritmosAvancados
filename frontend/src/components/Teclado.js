@@ -1,21 +1,26 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import TecladoButton from "./TecladoButton";
 
-function Teclado({ teclas, setSenha }) {
+function Teclado({ teclas, setSenha, resetSenha }) {
   const [valorDigitado, setValorDigitado] = useState("");
 
+  useEffect(() => {
+    if (resetSenha) {
+      setValorDigitado(""); // Limpa o campo
+    }
+  }, [resetSenha]); // Sempre que `resetSenha` mudar, o campo será resetado
+
   const handleClick = (value) => {
-    var novoValor = valorDigitado + value;  // Concatenando sem vírgulas
-    novoValor = novoValor.replace(',', '');
-    setValorDigitado(novoValor);
-    setSenha(novoValor);  // Atualizando a senha sem vírgulas
+    const novoValor = valorDigitado + value;
+    setValorDigitado(novoValor.replace(",", ""));
+    setSenha(novoValor.replace(",", ""));
   };
 
   return (
     <div className="teclado-container">
       <div className="display">
         <input
-          type="text"
+          type="password"
           value={valorDigitado}
           readOnly
           className="display-input"
@@ -28,7 +33,7 @@ function Teclado({ teclas, setSenha }) {
             key={index}
             label={tecla.label}
             value={tecla.value}
-            onClick={() => handleClick(tecla.value)}  // Chamando a função de click
+            onClick={handleClick}
           />
         ))}
       </div>

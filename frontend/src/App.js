@@ -3,13 +3,14 @@ import Teclado from "./components/Teclado";
 import AcessButton from "./components/AcessButton";
 import CreateUserButton from "./components/CreateUserButton";
 import tecladoService from "./services/tecladoService";
-import logo from '../src/resources/catolica.png'; 
+import logo from "../src/resources/catolica.png";
 import CreateUserModal from "./components/CreateUserModal";
 
 function App() {
   const [teclado, setTeclado] = useState([]);
   const [erro, setErro] = useState("");
   const [senha, setSenha] = useState("");
+  const [resetSenha, setResetSenha] = useState(false);
 
   useEffect(() => {
     gerarTeclado();
@@ -24,43 +25,38 @@ function App() {
     }
   };
 
-  // const acessarSistema = async () => {
-  //   try {
-  //     await tecladoService.acessarSistema();
-  //     setErro("");
-  //     gerarTeclado();
-  //   } catch (err) {
-  //     setErro("Erro ao tentar acessar o sistema");
-  //   }
-  // };
-  const acessarSistema = async (senha) => {
+  const acessarSistema = async () => {
     try {
       console.log("Enviando senha: ", senha);
       const response = await tecladoService.acessarSistema(senha);
       setErro("");
-      gerarTeclado();
       alert(response.data.message);
     } catch (err) {
+      gerarTeclado();
+      setSenha("");
+      setResetSenha(true);
       setErro("Erro ao tentar acessar o sistema");
     }
   };
 
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const openModal = () => setIsModalOpen(true);
-  const closeModal = () => setIsModalOpen(false);
-
   return (
     <div className="App">
       <h1>Teclado Virtual</h1>
       {erro && <p className="error-message">{erro}</p>}
-      <Teclado teclas={teclado} />
-      <AcessButton onAcess={resetarTentativas} />
-      <CreateUserButton onAcess={openModal}/>
-      <CreateUserModal isOpen={isModalOpen} onRequestClose={closeModal} />
+      <Teclado teclas={teclado} setSenha={setSenha} resetSenha={resetSenha} />
+      
+      <div className="button-container">
+        <AcessButton onAcess={acessarSistema} />
+        <CreateUserButton onAcess={() => setIsModalOpen(true)} />
+      </div>
+      
+      <CreateUserModal isOpen={isModalOpen} onRequestClose={() => setIsModalOpen(false)} />
       <img src={logo} alt="Católica SC" className="logo"/>
     </div>
   );
+  
 }
 
 export default App;

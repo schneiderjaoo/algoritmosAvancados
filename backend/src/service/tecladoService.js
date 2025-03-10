@@ -1,6 +1,9 @@
+import bcrypt from 'bcrypt';
 import Teclado from "../models/Teclado.js";
+import Usuario from '../models/Usuario.js';
 
-const senhaFixa = "1289";
+const saltRounds = 10;
+let tentativasFalhas = {};
 
 const gerarTeclado = (req, res) => {
     try {
@@ -18,15 +21,25 @@ const resetarTentativas = (req, res) => {
     res.status(200).json({ message: "Tentativas resetadas" });
 };
 
-const acessar = (req, res) => {
+async function acessar (req, res) {
     console.log('Recebendo requisição...');
-    const { senha } = req.body; 
-    
-    console.log("Senha fixa: ", senhaFixa);
-    console.log("Recebi a senha: ", senha);
+    var { senha, usuario } = req.body; 
+  
+    if (tentativasFalhas[usuario] && tentativasFalhas[usuario] >= 3) {
+        return res.status(403).json({ message: "Usuário bloqueado. Tente novamente mais tarde." });
+    }
+
+    let senhaUsuario;
+    try {
+        senhaUsuario = (await Usuario.buscaUsuario(usuario)).senha;
+    } catch (err) {
+        return res.status(400).json({ message: "Usuário não encontrado." });
+    }
+  
+    senhaUsuario = Usuario.descriptografar(senhaUsuario);
 
     const validarSenha = (senhaDigitada) => {
-        if (senhaDigitada.length / 2 !== senhaFixa.length) {
+        if (senhaDigitada.length / 2 !== senhaUsuario.length) {
             return false;
         }
 
@@ -34,8 +47,8 @@ const acessar = (req, res) => {
             return false;
         }
 
-        for (let i = 0; i < senhaFixa.length; i++) {
-            const digitoFixo = senhaFixa[i];
+        for (let i = 0; i < senhaUsuario.length; i++) {
+            const digitoFixo = senhaUsuario[i];
             
             const parDigitado = senhaDigitada.substr(i * 2, 2);
 
@@ -48,11 +61,20 @@ const acessar = (req, res) => {
     };
 
     if (validarSenha(senha)) {
+        tentativasFalhas[usuario] = 0;
         res.status(200).json({ message: "Acesso concedido!" });
     } else {
-        console.log('Senha inválida');
+        if (!tentativasFalhas[usuario]) {
+            tentativasFalhas[usuario] = 1;
+        } else {
+            tentativasFalhas[usuario]++;
+        }
         Teclado.embaralharTeclas();
-        res.status(400).json({ message: "Acesso negado!" });
+        if (tentativasFalhas[usuario] >= 3) {
+            res.status(403).json({ message: "Usuário bloqueado. Tente novamente mais tarde." });
+        } else {
+            res.status(400).json({ message: "Acesso negado!" });
+        }
     }
 };
 

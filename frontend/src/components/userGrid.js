@@ -1,16 +1,14 @@
-import React, { useState } from "react";
+import React from "react";
 
-function UserGrid() {
-  const [username, setUsername] = useState("");
-
+function UserGrid({ usuario, setUsuario }) {
   return (
     <div className="user-grid">
       <input
         type="text"
-        value={username}
-        onChange={(e) => setUsername(e.target.value)}
-        placeholder="Digite seu nome"
-        aria-label="Nome de usuário"
+        value={usuario} 
+        onChange={(e) => setUsuario(e.target.value)} 
+        placeholder="Usuário"
+        aria-label="Usuário"
         autoComplete="off"
       />
     </div>

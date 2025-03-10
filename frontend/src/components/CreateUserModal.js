@@ -10,7 +10,7 @@ function CreateUserModal({ isOpen, onRequestClose }) {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post('http://localhost:3001/api/usuarios', {
+      const response = await axios.post('http://localhost:3001/api/usuario/criar', {
         nome_usuario: nomeUsuario,
         senha_hash: senha,
         email: email,
@@ -21,7 +21,8 @@ function CreateUserModal({ isOpen, onRequestClose }) {
       setEmail("");
       setErro("");
     } catch (error) {
-      setErro("Erro ao criar usuário");
+      // setErro(error.response.data.mess);
+      setErro(error.response ? error.response.data.message : "Erro desconhecido.");
     }
   };
 

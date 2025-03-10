@@ -5,6 +5,6 @@ const { criarUsuario } = usuarioService;
 
 const router = express.Router();
 
-router.post("usuarios", criarUsuario);
+router.post("/usuario/criar", criarUsuario);
 
 export default router;

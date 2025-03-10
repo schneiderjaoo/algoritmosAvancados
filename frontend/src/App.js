@@ -12,6 +12,7 @@ function App() {
   const [erro, setErro] = useState("");
   const [senha, setSenha] = useState("");
   const [resetSenha, setResetSenha] = useState(false);
+  const [usuario, setUsuario] = useState("");
 
   useEffect(() => {
     gerarTeclado();
@@ -28,15 +29,14 @@ function App() {
 
   const acessarSistema = async () => {
     try {
-      console.log("Enviando senha: ", senha);
-      const response = await tecladoService.acessarSistema(senha);
+      const response = await tecladoService.acessarSistema(senha, usuario);
       setErro("");
       alert(response.data.message);
     } catch (err) {
       gerarTeclado();
       setSenha("");
       setResetSenha(true);
-      setErro("Erro ao tentar acessar o sistema");
+      setErro(err.response ? err.response.data.message : "Erro desconhecido.");
     }
   };
 
@@ -45,7 +45,7 @@ function App() {
   return (
     <div className="App">
       <h1>Teclado Virtual</h1>
-      <UserGrid uGrid />
+      <UserGrid usuario={usuario} setUsuario={setUsuario} />
       {erro && <p className="error-message">{erro}</p>}
       <Teclado teclas={teclado} setSenha={setSenha} resetSenha={resetSenha} />
       

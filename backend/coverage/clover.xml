@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1741655350818" clover="3.2.0">
+  <project timestamp="1741655350818" name="All files">
+    <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3" elements="22" coveredelements="22" complexity="0" loc="17" ncloc="17" packages="1" files="1" classes="1"/>
+    <file name="Teclado.js" path="C:\Estudos\algoritmosAvancados\backend\src\models\Teclado.js">
+      <metrics statements="17" coveredstatements="17" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <line num="2" count="1" type="stmt"/>
+      <line num="3" count="1" type="stmt"/>
+      <line num="6" count="3" type="cond" truecount="2" falsecount="0"/>
+      <line num="7" count="1" type="stmt"/>
+      <line num="8" count="1" type="stmt"/>
+      <line num="11" count="2" type="stmt"/>
+      <line num="12" count="2" type="stmt"/>
+      <line num="16" count="4" type="stmt"/>
+      <line num="18" count="86" type="stmt"/>
+      <line num="20" count="4" type="stmt"/>
+      <line num="22" count="4" type="stmt"/>
+      <line num="23" count="20" type="stmt"/>
+      <line num="24" count="20" type="stmt"/>
+      <line num="26" count="20" type="stmt"/>
+      <line num="32" count="4" type="stmt"/>
+      <line num="33" count="4" type="stmt"/>
+      <line num="37" count="1" type="stmt"/>
+    </file>
+  </project>
+</coverage>

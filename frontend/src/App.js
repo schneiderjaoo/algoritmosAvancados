@@ -6,6 +6,9 @@ import tecladoService from "./services/tecladoService";
 import logo from "../src/resources/catolica.png";
 import CreateUserModal from "./components/CreateUserModal";
 import UserGrid from "./components/userGrid";
+import CryptoJS from "crypto-js";
+
+const chaveSecreta = "teste-front";
 
 function App() {
   const [teclado, setTeclado] = useState([]);
@@ -29,7 +32,10 @@ function App() {
 
   const acessarSistema = async () => {
     try {
-      const response = await tecladoService.acessarSistema(senha, usuario);
+      const senhaCriptografada = CryptoJS.AES.encrypt(senha, chaveSecreta).toString();
+      const response = await tecladoService.acessarSistema(senhaCriptografada, usuario);
+      localStorage.setItem("token", response.data.token);
+      console.log("Token: ", response.data.token);
       setErro("");
       alert(response.data.message);
     } catch (err) {

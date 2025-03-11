@@ -1,6 +1,12 @@
 import bcrypt from 'bcrypt';
 import Teclado from "../models/Teclado.js";
 import Usuario from '../models/Usuario.js';
+import CryptoJS from "crypto-js";
+import jwt from "jsonwebtoken";
+import dotenv from "dotenv";
+dotenv.config();
+
+const chaveSecreta = "teste-front";
 
 const saltRounds = 10;
 let tentativasFalhas = {};
@@ -24,7 +30,10 @@ const resetarTentativas = (req, res) => {
 async function acessar (req, res) {
     console.log('Recebendo requisição...');
     var { senha, usuario } = req.body; 
-  
+
+    const bytes = CryptoJS.AES.decrypt(senha, chaveSecreta);
+    const senhaDescriptografada = bytes.toString(CryptoJS.enc.Utf8);
+
     if (tentativasFalhas[usuario] && tentativasFalhas[usuario] >= 3) {
         return res.status(403).json({ message: "Usuário bloqueado. Tente novamente mais tarde." });
     }
@@ -60,9 +69,11 @@ async function acessar (req, res) {
         return true;
     };
 
-    if (validarSenha(senha)) {
+    if (validarSenha(senhaDescriptografada)) {
         tentativasFalhas[usuario] = 0;
-        res.status(200).json({ message: "Acesso concedido!" });
+        console.log("JWT_SECRET:", process.env.JWT_SECRET);
+        const token = jwt.sign({ usuario }, process.env.JWT_SECRET, { expiresIn: "15m" });
+        res.status(200).json({ message: "Acesso concedido!", token });
     } else {
         if (!tentativasFalhas[usuario]) {
             tentativasFalhas[usuario] = 1;

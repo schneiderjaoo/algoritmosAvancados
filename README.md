@@ -47,7 +47,11 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
    ```sh
    npm install  # precisa ser o Node 16.20.2
    ```
-2. Inicie o servidor:
+2. Execute o servidor de desenvolvimento:
+   ```sh
+   npm run build
+   ```
+3. Execute o servidor de desenvolvimento:
    ```sh
    npm run dev
    ```
@@ -58,6 +62,10 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
    npm install  # precisa ser o Node 16.20.2
    ```
 2. Execute o servidor de desenvolvimento:
+   ```sh
+   npm run build
+   ```
+3. Execute o servidor de desenvolvimento:
    ```sh
    npm run start
    ```

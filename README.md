@@ -17,8 +17,8 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
 ### Tecnologias Utilizadas
 - **Frontend:** React.js
 - **Backend:** Node.js
-- **Banco de Dados:** Postgress
-- **Criptografia:** Implementação de AES ou RSA para codificação do ID de sessão
+- **Banco de Dados:** Postgres
+- **Criptografia:** CryptoJS
 
 ## Estrutura do Projeto
 

@@ -45,45 +45,26 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
 ### Backend
 1. Instale as dependências:
    ```sh
-   npm install  # ou equivalente na linguagem escolhida
+   npm install  # precisa ser o Node 16.20.2
    ```
-2. Configure as variáveis de ambiente (arquivo `.env`).
-3. Inicie o servidor:
+2. Inicie o servidor:
    ```sh
-   npm start
+   npm run dev
    ```
 
 ### Frontend
 1. Instale as dependências:
    ```sh
-   npm install
+   npm install  # precisa ser o Node 16.20.2
    ```
 2. Execute o servidor de desenvolvimento:
    ```sh
-   npm run dev
+   npm run start
    ```
 
 ## Banco de Dados
-- Criar a estrutura no MySQL (ou outro banco escolhido)
+- Criar a estrutura no PostGres
 - Executar os scripts de migração (`schema.sql`)
-
-## Segurança Implementada
-- **Criptografia:** Uso de AES ou RSA para codificação do ID de sessão.
-- **Proteção contra reutilização de sessão:** ID de sessão é descartado após uso.
-- **Validação no backend:** Evita ataques de replay e análise de pacotes.
-
-## Testes
-- Testes unitários e de integração para validar o correto funcionamento do sistema.
-- Ferramentas sugeridas: Jest, Mocha, JUnit, etc.
-
-## Apresentação
-- O projeto inclui uma apresentação em PowerPoint com os detalhes da implementação, arquitetura e decisões técnicas.
-
-## Avaliação
-A nota final será baseada em avaliações feitas pelos alunos e pelo professor, conforme os critérios estabelecidos.
-
-## Contribuições
-Sinta-se à vontade para contribuir com melhorias. Faça um fork do projeto e envie um Pull Request!
 
 ## Licença
 Este projeto está sob a licença MIT.

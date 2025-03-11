@@ -63,8 +63,8 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
    ```
 
 ## Banco de Dados
-- Criar a estrutura no PostGres
-- Executar os scripts de migração (`schema.sql`)
+- Criar a estrutura no Postgres
+- Executar os scripts de migração (`db.sql`) #Está dentro do backend/src/config
 
 ## Licença
 Este projeto está sob a licença MIT.

@@ -24,22 +24,20 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
 
 ```
 📁 teclado-virtual
-├── 📂 frontend
-│   ├── src/
-│   ├── public/
-│   └── package.json
 ├── 📂 backend
-│   ├── src/
-│   ├── config/
-│   ├── controllers/
-│   ├── models/
-│   ├── routes/
-│   └── server.js
-├── 📂 database
-│   ├── schema.sql
-│   ├── migrations/
-│   └── seeders/
-└── README.md
+│   ├── 📂 coverage
+│   ├── 📂 node_modules
+│   ├── 📂 src
+│   ├── 📂 test
+├── 📂 frontend
+│   ├── 📂 build
+│   ├── 📂 node_modules
+│   ├── 📂 public
+│   ├── 📂 src
+│   │   ├── 📂 components
+│   │   ├── 📂 resources
+│   │   ├── 📂 services
+└── README.md   
 ```
 
 ## Configuração e Execução

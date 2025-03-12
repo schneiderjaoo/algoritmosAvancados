@@ -24,7 +24,6 @@ function CreateUserModal({ isOpen, onRequestClose }) {
       setEmail("");
       setErro("");
     } catch (error) {
-      // setErro(error.response.data.mess);
       setErro(error.response ? error.response.data.message : "Erro desconhecido.");
     }
   };

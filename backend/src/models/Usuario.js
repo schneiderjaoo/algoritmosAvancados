@@ -8,14 +8,10 @@ const chaveSecreta = 'teste';
 const chaveSecreta2 = 'teste-front'
 
 async function createUsuario(nome, email, senha) {
-    console.log('vamos salvar agora');
     const db = await connectDB();
 
     const bytes = CryptoJS.AES.decrypt(senha, chaveSecreta2);
     const senhaDescriptografada = bytes.toString(CryptoJS.enc.Utf8);
-    console.log("Senha: " + senha);
-    console.log("bytes: ", bytes);
-    console.log("Senha nova: " + senhaDescriptografada);
 
     if (!/^\d{6}$/.test(senhaDescriptografada)) {
         throw new Error('A senha deve ter 6 dígitos numéricos.');
@@ -37,7 +33,6 @@ async function createUsuario(nome, email, senha) {
 }
 
 async function buscaUsuario(nome) {
-    console.log('vamos buscar o usuário');
     const db = await connectDB();
 
     const query = 'SELECT nome, senha FROM usuarios WHERE nome = $1';

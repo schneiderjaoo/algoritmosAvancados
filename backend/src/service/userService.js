@@ -2,7 +2,6 @@ import Usuario from '../models/Usuario.js';
 
 const criarUsuario = async (req, res) => {
     try {
-        console.log('chamei o criar usuario!');
         const { nome_usuario, email, senha_hash } = req.body;
         if (!nome_usuario || !email || !senha_hash) {
             return res.status(400).json({ message: 'Nome, email e senha são obrigatórios.' });

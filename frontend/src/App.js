@@ -16,26 +16,45 @@ function App() {
   const [senha, setSenha] = useState("");
   const [resetSenha, setResetSenha] = useState(false);
   const [usuario, setUsuario] = useState("");
+  const [sessionId, setSessionId] = useState("");
 
   useEffect(() => {
-    gerarTeclado();
+    gerarSessionId();
   }, []);
+
+  useEffect(() => {
+    if (sessionId) {
+      gerarTeclado();
+    }
+  }, [sessionId]); 
+
+  const gerarSessionId = async () => {
+    try {
+      const response = await tecladoService.gerarSessionId(); 
+      setSessionId(response.data.sessionId); 
+      localStorage.setItem("sessionId", response.data.sessionId);
+    } catch (err) {
+      setErro("Erro ao obter Session ID");
+    }
+  };
 
   const gerarTeclado = async () => {
     try {
-      const response = await tecladoService.gerarTeclado();
+      const response = await tecladoService.gerarTeclado(sessionId);
       setTeclado(response.data);
     } catch (err) {
-      setErro("Erro ao carregar teclado");
+      setErro(err.response ? err.response.data.message : "Erro desconhecido.");
     }
   };
 
   const acessarSistema = async () => {
     try {
       const senhaCriptografada = CryptoJS.AES.encrypt(senha, chaveSecreta).toString();
-      const response = await tecladoService.acessarSistema(senhaCriptografada, usuario);
+      const response = await tecladoService.acessarSistema(senhaCriptografada, usuario, sessionId);
       localStorage.setItem("token", response.data.token);
+      localStorage.setItem("sessionId", response.data.sessionId);
       console.log("Token: ", response.data.token);
+      console.log("Session ID: ", response.data.sessionId);
       setErro("");
       alert(response.data.message);
     } catch (err) {

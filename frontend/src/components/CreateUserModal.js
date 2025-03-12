@@ -1,5 +1,8 @@
 import React, { useState } from "react";
 import axios from "axios";
+import CryptoJS from "crypto-js";
+
+const chaveSecreta = "teste-front";
 
 function CreateUserModal({ isOpen, onRequestClose }) {
   const [nomeUsuario, setNomeUsuario] = useState("");
@@ -12,7 +15,7 @@ function CreateUserModal({ isOpen, onRequestClose }) {
     try {
       const response = await axios.post('http://localhost:3001/api/usuario/criar', {
         nome_usuario: nomeUsuario,
-        senha_hash: senha,
+        senha_hash: CryptoJS.AES.encrypt(senha, chaveSecreta).toString(),
         email: email,
       });
       onRequestClose();

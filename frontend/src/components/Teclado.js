@@ -1,19 +1,25 @@
 import React, { useState, useEffect } from "react";
 import TecladoButton from "./TecladoButton";
+import { FaBackspace } from "react-icons/fa";
 
 function Teclado({ teclas, setSenha, resetSenha }) {
   const [valorDigitado, setValorDigitado] = useState("");
 
   useEffect(() => {
     if (resetSenha) {
-      setValorDigitado(""); // Limpa o campo
+      setValorDigitado(""); 
     }
-  }, [resetSenha]); // Sempre que `resetSenha` mudar, o campo será resetado
+  }, [resetSenha]); 
 
   const handleClick = (value) => {
     const novoValor = valorDigitado + value;
     setValorDigitado(novoValor.replace(",", ""));
     setSenha(novoValor.replace(",", ""));
+  };
+
+  const handleClear = () => {
+    setValorDigitado("");  
+    setSenha("");          
   };
 
   return (
@@ -36,6 +42,10 @@ function Teclado({ teclas, setSenha, resetSenha }) {
             onClick={handleClick}
           />
         ))}
+        
+        <button className="teclado-button apagar" onClick={handleClear}>
+          <FaBackspace /> CE
+        </button>
       </div>
     </div>
   );

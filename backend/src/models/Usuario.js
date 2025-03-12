@@ -1,20 +1,28 @@
 import bcrypt from 'bcrypt';
 import crypto from 'crypto';
 import connectDB from '../config/dbconfig.js';
+import CryptoJS from "crypto-js";
 
 const saltRounds = 10;
 const chaveSecreta = 'teste';
+const chaveSecreta2 = 'teste-front'
 
 async function createUsuario(nome, email, senha) {
     console.log('vamos salvar agora');
     const db = await connectDB();
 
-    if (!/^\d{4}$/.test(senha)) {
-        throw new Error('A senha deve ter 4 dígitos numéricos.');
+    const bytes = CryptoJS.AES.decrypt(senha, chaveSecreta2);
+    const senhaDescriptografada = bytes.toString(CryptoJS.enc.Utf8);
+    console.log("Senha: " + senha);
+    console.log("bytes: ", bytes);
+    console.log("Senha nova: " + senhaDescriptografada);
+
+    if (!/^\d{6}$/.test(senhaDescriptografada)) {
+        throw new Error('A senha deve ter 6 dígitos numéricos.');
     }
 
-    const senhaHash = await bcrypt.hash(senha, saltRounds);
-    const senhaHash2 = criptografar(senha);
+    const senhaHash = await bcrypt.hash(senhaDescriptografada, saltRounds);
+    const senhaHash2 = criptografar(senhaDescriptografada);
     const query = 'INSERT INTO usuarios (nome, email, senha) VALUES ($1, $2, $3) RETURNING *';
     const values = [nome, email, senhaHash2];
 

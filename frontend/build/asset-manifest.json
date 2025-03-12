@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/static/css/main.7f75066c.css",
+    "main.js": "/static/js/main.1c1019d1.js",
+    "static/media/catolica.png": "/static/media/catolica.23906b4e6e3c136bb975.png",
+    "index.html": "/index.html",
+    "main.7f75066c.css.map": "/static/css/main.7f75066c.css.map",
+    "main.1c1019d1.js.map": "/static/js/main.1c1019d1.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.7f75066c.css",
+    "static/js/main.1c1019d1.js"
+  ]
+}

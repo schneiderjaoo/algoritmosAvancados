@@ -4,7 +4,7 @@ const sessoesAtivas = new Map();
 
 export const criarSession = () => {
     const sessionId = uuidv4(); 
-    const expiracao = Date.now() + 15 * 1000;
+    const expiracao = Date.now() + 30 * 60 * 1000;
     sessoesAtivas.set(sessionId, expiracao);
     return sessionId;
 };

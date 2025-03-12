@@ -73,3 +73,12 @@ O objetivo deste desafio é implementar um teclado virtual que aumenta a seguran
 ## Banco de Dados
 - Criar a estrutura no Postgres
 - Executar os scripts de migração (`db.sql`) #Está dentro do backend/src/config
+
+## Observação
+- Lembrando que é necessário abrir dois terminais no vscode, um deve-se realizar o cd backend -> npm install -> comandos para execução e no outro terminal cd frontend -> npm install -> comandos para execução
+
+## Regras 
+- Senha sempre é enviado criptografado para o backend
+- Senha sempre é salva criptografada no banco de dados
+- ID de Sessão é gerado ao abrir o site e possui tempo de expiração sempre que é executado uma ação validamos o ID e geramos outro
+- Ao validar usuário geramos um token.
